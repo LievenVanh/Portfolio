@@ -90,6 +90,7 @@ namespace BrolIndexer.Controllers
                 ViewBag.ErrorMessage = "Herstelbon met ID " + id + " bestaat niet.";
                 ViewBag.Url = Url.Action("Index", "Herstelling");
             }
+            Session["aanmaakDatum"] = herstelbon.Aanmaakdatum;
             ViewBag.KlantId = new SelectList(db.Klanten, "KlantId", "Naam", herstelbon.KlantId);
             ViewBag.TechnicusId = new SelectList(db.Technici, "TechnicusId", "Naam", herstelbon.TechnicusId);
             ViewBag.StatusId = new SelectList(db.Statussen, "StatusId", "StatusNaam", herstelbon.StatusId);
@@ -106,7 +107,8 @@ namespace BrolIndexer.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                herstelbon.Aanmaakdatum = (DateTime) Session["AanmaakDatum"];
+                HttpContext.Session.Clear();
                 db.Entry(herstelbon).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
