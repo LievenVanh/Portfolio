@@ -1,0 +1,71 @@
+﻿@model BrolIndexer.Models.Herstelbon
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Herstelbon</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Aanmaakdatum)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Aanmaakdatum)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Klachtomschrijving)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Klachtomschrijving)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Computeromschrijving)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Computeromschrijving)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Accessoires)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Accessoires)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Opmerkingen)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Opmerkingen)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Technicus.Naam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Technicus.Naam)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Klant.Naam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Klant.Naam)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status.StatusNaam)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status.StatusNaam)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.HerstelbonId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

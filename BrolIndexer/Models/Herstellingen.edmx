@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HerstellingenModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="HerstellingenModelStoreContainer">
+          <EntitySet Name="Herstelbonnen" EntityType="HerstellingenModel.Store.Herstelbonnen" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Klanten" EntityType="HerstellingenModel.Store.Klanten" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Statussen" EntityType="HerstellingenModel.Store.Statussen" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Technici" EntityType="HerstellingenModel.Store.Technici" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Herstelbon/Klant" Association="HerstellingenModel.Store.FK__Herstelbon/Klant">
+            <End Role="Klanten" EntitySet="Klanten" />
+            <End Role="Herstelbonnen" EntitySet="Herstelbonnen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Herstelbon/Technicus" Association="HerstellingenModel.Store.FK__Herstelbon/Technicus">
+            <End Role="Technici" EntitySet="Technici" />
+            <End Role="Herstelbonnen" EntitySet="Herstelbonnen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Status" Association="HerstellingenModel.Store.FK_Status">
+            <End Role="Statussen" EntitySet="Statussen" />
+            <End Role="Herstelbonnen" EntitySet="Herstelbonnen" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Herstelbonnen">
+          <Key>
+            <PropertyRef Name="HerstelbonId" />
+          </Key>
+          <Property Name="Aanmaakdatum" Type="date" />
+          <Property Name="Klachtomschrijving" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Computeromschrijving" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Accessoires" Type="nvarchar" MaxLength="255" />
+          <Property Name="Opmerkingen" Type="nvarchar" MaxLength="255" />
+          <Property Name="TechnicusId" Type="int" />
+          <Property Name="KlantId" Type="int" Nullable="false" />
+          <Property Name="HerstelbonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="Klanten">
+          <Key>
+            <PropertyRef Name="KlantId" />
+          </Key>
+          <Property Name="Voornaam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Familienaam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Straat" Type="nvarchar" MaxLength="250" />
+          <Property Name="HuisNr" Type="nchar" MaxLength="10" />
+          <Property Name="Postcode" Type="nchar" MaxLength="10" />
+          <Property Name="Woonplaats" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telefoon" Type="nchar" Nullable="false" MaxLength="20" />
+          <Property Name="KlantId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Statussen">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusNaam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Technici">
+          <Key>
+            <PropertyRef Name="TechnicusId" />
+          </Key>
+          <Property Name="Voornaam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Familienaam" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Specialiteit" Type="nvarchar" MaxLength="250" />
+          <Property Name="TechnicusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Herstelbon/Klant">
+          <End Role="Klanten" Type="HerstellingenModel.Store.Klanten" Multiplicity="1" />
+          <End Role="Herstelbonnen" Type="HerstellingenModel.Store.Herstelbonnen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klanten">
+              <PropertyRef Name="KlantId" />
+            </Principal>
+            <Dependent Role="Herstelbonnen">
+              <PropertyRef Name="KlantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Herstelbon/Technicus">
+          <End Role="Technici" Type="HerstellingenModel.Store.Technici" Multiplicity="0..1" />
+          <End Role="Herstelbonnen" Type="HerstellingenModel.Store.Herstelbonnen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Technici">
+              <PropertyRef Name="TechnicusId" />
+            </Principal>
+            <Dependent Role="Herstelbonnen">
+              <PropertyRef Name="TechnicusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Status">
+          <End Role="Statussen" Type="HerstellingenModel.Store.Statussen" Multiplicity="0..1" />
+          <End Role="Herstelbonnen" Type="HerstellingenModel.Store.Herstelbonnen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statussen">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Herstelbonnen">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HerstellingenModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HerstellingenEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Herstelbonnen" EntityType="HerstellingenModel.Herstelbon" />
+          <EntitySet Name="Klanten" EntityType="HerstellingenModel.Klant" />
+          <EntitySet Name="Technici" EntityType="HerstellingenModel.Technicus" />
+          <AssociationSet Name="FK__Herstelbo__Klant__0AD2A005" Association="HerstellingenModel.FK__Herstelbo__Klant__0AD2A005">
+            <End Role="Klanten" EntitySet="Klanten" />
+            <End Role="Herstelbonnen" EntitySet="Herstelbonnen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Herstelbo__Techn__09DE7BCC" Association="HerstellingenModel.FK__Herstelbo__Techn__09DE7BCC">
+            <End Role="Technici" EntitySet="Technici" />
+            <End Role="Herstelbonnen" EntitySet="Herstelbonnen" />
+          </AssociationSet>
+          <EntitySet Name="Statussen" EntityType="HerstellingenModel.Status" />
+          <AssociationSet Name="FK_Status" Association="HerstellingenModel.FK_Status">
+            <End Role="Statussen" EntitySet="Statussen" />
+            <End Role="Herstelbon" EntitySet="Herstelbonnen" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Herstelbon">
+          <Key>
+            <PropertyRef Name="HerstelbonId" />
+          </Key>
+          <Property Name="HerstelbonId" Type="Int32" Nullable="false" />
+          <Property Name="Aanmaakdatum" Type="DateTime" Precision="0" />
+          <Property Name="Klachtomschrijving" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Computeromschrijving" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Accessoires" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Opmerkingen" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="TechnicusId" Type="Int32" />
+          <Property Name="KlantId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Klant" Relationship="HerstellingenModel.FK__Herstelbo__Klant__0AD2A005" FromRole="Herstelbonnen" ToRole="Klanten" />
+          <NavigationProperty Name="Technicus" Relationship="HerstellingenModel.FK__Herstelbo__Techn__09DE7BCC" FromRole="Herstelbonnen" ToRole="Technici" />
+          <Property Type="Int32" Name="StatusId" />
+          <NavigationProperty Name="Status" Relationship="HerstellingenModel.FK_Status" FromRole="Herstelbon" ToRole="Statussen" />
+        </EntityType>
+        <EntityType Name="Klant">
+          <Key>
+            <PropertyRef Name="KlantId" />
+          </Key>
+          <Property Name="KlantId" Type="Int32" Nullable="false" />
+          <Property Name="Voornaam" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Familienaam" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Straat" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="HuisNr" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="Postcode" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="Woonplaats" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Telefoon" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Herstelbonnen" Relationship="HerstellingenModel.FK__Herstelbo__Klant__0AD2A005" FromRole="Klanten" ToRole="Herstelbonnen" />
+          <Property Type="String" Name="Login" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Technicus">
+          <Key>
+            <PropertyRef Name="TechnicusId" />
+          </Key>
+          <Property Name="TechnicusId" Type="Int32" Nullable="false" />
+          <Property Name="Voornaam" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Familienaam" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Specialiteit" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Herstelbonnen" Relationship="HerstellingenModel.FK__Herstelbo__Techn__09DE7BCC" FromRole="Technici" ToRole="Herstelbonnen" />
+          <Property Type="String" Name="Login" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__Herstelbo__Klant__0AD2A005">
+          <End Role="Klanten" Type="HerstellingenModel.Klant" Multiplicity="1" />
+          <End Role="Herstelbonnen" Type="HerstellingenModel.Herstelbon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klanten">
+              <PropertyRef Name="KlantId" />
+            </Principal>
+            <Dependent Role="Herstelbonnen">
+              <PropertyRef Name="KlantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Herstelbo__Techn__09DE7BCC">
+          <End Role="Technici" Type="HerstellingenModel.Technicus" Multiplicity="0..1" />
+          <End Role="Herstelbonnen" Type="HerstellingenModel.Herstelbon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Technici">
+              <PropertyRef Name="TechnicusId" />
+            </Principal>
+            <Dependent Role="Herstelbonnen">
+              <PropertyRef Name="TechnicusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Type="String" Name="StatusNaam" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="StatusId" Nullable="false" />
+          <NavigationProperty Name="Herstelbonnen" Relationship="HerstellingenModel.FK_Status" FromRole="Statussen" ToRole="Herstelbon" />
+        </EntityType>
+        <Association Name="FK_Status">
+          <End Type="HerstellingenModel.Status" Role="Statussen" Multiplicity="0..1" />
+          <End Type="HerstellingenModel.Herstelbon" Role="Herstelbon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statussen">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="Herstelbon">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HerstellingenModelStoreContainer" CdmEntityContainer="HerstellingenEntities">
+          <EntitySetMapping Name="Herstelbonnen">
+            <EntityTypeMapping TypeName="HerstellingenModel.Herstelbon">
+              <MappingFragment StoreEntitySet="Herstelbonnen">
+                <ScalarProperty Name="StatusId" ColumnName="Status" />
+                <ScalarProperty Name="HerstelbonId" ColumnName="HerstelbonId" />
+                <ScalarProperty Name="Aanmaakdatum" ColumnName="Aanmaakdatum" />
+                <ScalarProperty Name="Klachtomschrijving" ColumnName="Klachtomschrijving" />
+                <ScalarProperty Name="Computeromschrijving" ColumnName="Computeromschrijving" />
+                <ScalarProperty Name="Accessoires" ColumnName="Accessoires" />
+                <ScalarProperty Name="Opmerkingen" ColumnName="Opmerkingen" />
+                <ScalarProperty Name="TechnicusId" ColumnName="TechnicusId" />
+                <ScalarProperty Name="KlantId" ColumnName="KlantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klanten">
+            <EntityTypeMapping TypeName="HerstellingenModel.Klant">
+              <MappingFragment StoreEntitySet="Klanten">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="KlantId" ColumnName="KlantId" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Familienaam" ColumnName="Familienaam" />
+                <ScalarProperty Name="Straat" ColumnName="Straat" />
+                <ScalarProperty Name="HuisNr" ColumnName="HuisNr" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Woonplaats" ColumnName="Woonplaats" />
+                <ScalarProperty Name="Telefoon" ColumnName="Telefoon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Technici">
+            <EntityTypeMapping TypeName="HerstellingenModel.Technicus">
+              <MappingFragment StoreEntitySet="Technici">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="TechnicusId" ColumnName="TechnicusId" />
+                <ScalarProperty Name="Voornaam" ColumnName="Voornaam" />
+                <ScalarProperty Name="Familienaam" ColumnName="Familienaam" />
+                <ScalarProperty Name="Specialiteit" ColumnName="Specialiteit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statussen">
+            <EntityTypeMapping TypeName="HerstellingenModel.Status">
+              <MappingFragment StoreEntitySet="Statussen">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="StatusNaam" ColumnName="StatusNaam" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,11 @@
+﻿@model int
+@{
+    ViewBag.Title = "Foto uploaden";
+}
+
+<h2>Een persoonlijke foto uploaden</h2>
+@using (Html.BeginForm("FotoUpload", "Persoon", new {id = Model}, FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    <input type="file" name="Foto"/>
+    <input type="submit" value="Uploaden"/>
+}

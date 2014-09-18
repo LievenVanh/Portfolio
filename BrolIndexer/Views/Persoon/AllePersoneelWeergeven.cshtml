@@ -1,0 +1,18 @@
+﻿@using BrolIndexer.Models
+@model List<BrolIndexer.Models.Technicus>
+
+@{
+    ViewBag.Title = "Cast and Crew";
+}
+
+<h1>Ons team</h1>
+<h2>Technici</h2>
+<ul class="details">
+    @foreach (var technicus in Model)
+    {
+        <li>@technicus.Naam</li>
+        string fotopath = technicus.TechnicusId + ".jpg";
+        <li><img src="~/Content/fotos/@fotopath" height="200" /></li>
+
+    }
+</ul>

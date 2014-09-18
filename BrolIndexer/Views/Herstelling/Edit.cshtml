@@ -1,0 +1,95 @@
+﻿@model BrolIndexer.Models.Herstelbon
+
+@{
+    ViewBag.Title = "Bewerken";
+}
+
+<h2>Bewerken</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Herstelbon</legend>
+
+        @Html.HiddenFor(model => model.HerstelbonId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Aanmaakdatum)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Aanmaakdatum)
+            @Html.ValidationMessageFor(model=>model.Aanmaakdatum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Klachtomschrijving)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Klachtomschrijving)
+            @Html.ValidationMessageFor(model => model.Klachtomschrijving)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Computeromschrijving)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Computeromschrijving)
+            @Html.ValidationMessageFor(model => model.Computeromschrijving)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Accessoires)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Accessoires)
+            @Html.ValidationMessageFor(model => model.Accessoires)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Opmerkingen)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Opmerkingen)
+            @Html.ValidationMessageFor(model => model.Opmerkingen)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TechnicusId, "Technicus")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("TechnicusId")
+            @Html.ValidationMessageFor(model => model.TechnicusId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.KlantId, "Klant")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("KlantId")
+            @Html.DisplayFor(model=>model.Klant.Naam)
+            @Html.ValidationMessageFor(model => model.KlantId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StatusId, "Status")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("StatusId")
+            @Html.ValidationMessageFor(model => model.StatusId)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

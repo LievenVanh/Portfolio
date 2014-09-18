@@ -1,0 +1,24 @@
+﻿@using BrolIndexer.Models
+@model BrolIndexer.Models.Technicus
+
+@{
+    ViewBag.Title = "GeefTechnicusWeer";
+}
+<link href="~/Content/Site.css" rel="stylesheet" />
+<h2>Details van technicus @Model.Naam</h2>
+
+<ul class="details">
+    <li><strong>Naam:</strong> @Model.Naam</li>
+    <li><img src="~/Content/fotos/@(Model.TechnicusId).jpg" alt="Foto van de technicus" height="200" /></li>
+    @if (User.IsInRole("Technicus") || User.IsInRole("Admin"))
+    {
+        <li>@using (Html.BeginForm("FotoUpload", "Persoon", new {id = Model.TechnicusId}, FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    <input type="file" name="Foto"/>
+    <input type="submit" value="Uploaden"/>
+}</li>
+        <li><strong>Technicusnr:</strong> @Model.TechnicusId</li>
+        <li><strong>Gebruikersnaam:</strong> @Model.Login</li>
+        <li><strong>@Html.ActionLink("Al uw herstellingen", "AlleHerstellingenVanTechnicus", "Herstelling", new {id = Model.TechnicusId}, null)</strong></li>
+    }
+</ul>

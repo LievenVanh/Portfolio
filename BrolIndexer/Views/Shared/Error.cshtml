@@ -1,0 +1,13 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<hgroup class="title">
+    <h1 class="error">Error. </h1>
+    <h2 class="error">Er deed zich een fout voor bij het opvragen van de informatie.</h2>
+    <h3 class="error">@ViewBag.ErrorMessage</h3>
+    <h4><a href="@ViewBag.Url">Terug</a></h4>
+    
+</hgroup>

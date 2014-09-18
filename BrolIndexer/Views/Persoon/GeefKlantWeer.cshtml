@@ -1,0 +1,17 @@
+﻿@model BrolIndexer.Models.Klant
+
+@{
+    ViewBag.Title = "Details van klant "+@Model.Naam;
+}
+<link href="~/Content/Site.css" rel="stylesheet" />
+<h2>Details van @Model.Naam</h2>
+
+<ul class="details">
+    <li><strong>Klantnr:</strong> @Model.KlantId</li>
+    <li><strong>Voornaam:</strong> @Model.Voornaam</li>
+    <li><strong>Familienaam:</strong> @Model.Familienaam</li>
+    <li><strong>Adres:</strong> @Model.Straat @Model.HuisNr</li>
+    <li>@Model.Postcode @Model.Woonplaats</li>
+    <li><strong>Gebruikersnaam:</strong> @Model.Login</li>
+</ul>
+

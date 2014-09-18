@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BrolIndexer.Models.Herstelbon>
+
+@{
+    ViewBag.Title = "Herstellingen";
+}
+
+<h2>Herstellingen</h2>
+
+<p>
+    @Html.ActionLink("Nieuwe herstelbon", "Create")
+</p>
+<table class="zebra">
+    <thead>
+        <tr>
+            <th>Aanmaakdatum</th>
+            <th>Klacht</th>
+            <th>Omschrijving</th>
+            <th>Accessoires</th>
+            <th>Opmerkingen</th>
+            <th>Technicus</th>
+            @if (User.IsInRole("Technicus") || User.IsInRole("admin"))
+            {<th>Klant</th>}
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aanmaakdatum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Klachtomschrijving)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Computeromschrijving)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accessoires)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Opmerkingen)
+                </td>
+                <td>
+                    @Html.ActionLink(item.Technicus.Naam,"GeefTechnicusWeer","Persoon",new {id=item.Technicus.TechnicusId},null)
+                </td>
+                @if (User.IsInRole("Technicus") || User.IsInRole("admin"))
+                {
+                    <td>@Html.ActionLink(@item.Klant.Naam,"GeefKlantWeer","Persoon", new{id=item.KlantId},null)</td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.StatusNaam)
+                </td>
+                @if (User.IsInRole("Technicus") || User.IsInRole("admin"))
+                {
+                    <td>
+                        @Html.ActionLink("Bewerken", "Edit", new { id = item.HerstelbonId })
+                        @*@Html.ActionLink("Details", "Details", new { id=item.HerstelbonId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.HerstelbonId })*@
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+
+</table>
